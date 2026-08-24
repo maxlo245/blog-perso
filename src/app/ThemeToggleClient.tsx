@@ -5,9 +5,12 @@ export default function ThemeToggleClient() {
   const [theme, setTheme] = useState<string | null>(null);
 
   useEffect(() => {
+    // Lecture ponctuelle du thème sauvegardé (localStorage / préférence système) au montage :
+    // volontaire, ne dépend d'aucun état React et ne provoque pas de rendus en cascade.
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem("theme");
       if (saved) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setTheme(saved);
         document.documentElement.setAttribute("data-theme", saved);
       } else {
@@ -29,8 +32,12 @@ export default function ThemeToggleClient() {
 
   if (!theme) return null;
   return (
-    <button onClick={toggle} style={{marginLeft:16, border:'2px solid #b1001a', background:theme==="dark"?'#b1001a':'#fff', color:theme==="dark"?'#fff':'#b1001a', borderRadius:6, padding:'6px 18px', fontWeight:'bold', cursor:'pointer', transition:'all .2s'}}>
-      {theme === "dark" ? "Mode clair" : "Mode sombre"}
+    <button
+      onClick={toggle}
+      aria-label={theme === "dark" ? "Activer le mode clair" : "Activer le mode sombre"}
+      className="flex h-9 w-9 items-center justify-center rounded-full border border-[var(--color-border)] text-lg transition-all hover:border-brand-500 hover:text-brand-500"
+    >
+      {theme === "dark" ? "☀️" : "🌙"}
     </button>
   );
 }

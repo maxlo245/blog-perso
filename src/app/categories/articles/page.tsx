@@ -1,13 +1,18 @@
 export default function Articles() {
   return (
-    <section className="max-w-2xl mx-auto py-16 px-4 animate-fade-in">
-      <h1 className="text-4xl font-extrabold mb-8 text-[#b85c00]" style={{textShadow:'2px 2px 0 #fff, 4px 4px 8px #ffb34799'}}>Articles</h1>
-      <div className="flex flex-col gap-8">
+    <section className="mx-auto max-w-3xl animate-fade-in-up px-4 py-16 sm:px-6">
+      <h1 className="mb-10 text-3xl font-extrabold text-[var(--color-text)] sm:text-4xl">
+        Articles
+      </h1>
+      <div className="flex flex-col gap-5">
         {/* Placez ici vos articles */}
-        <div className="border-2 border-[#b85c00] rounded-xl bg-[#fffbe6] p-4 shadow">
-          <h2 className="text-xl font-bold mb-2 text-[#b85c00]">Premier article</h2>
-          <p className="text-[#b85c00]">Bienvenue sur mon blog ! Ceci est un exemple d'article. Vous pouvez ajouter vos propres textes ici.</p>
-        </div>
+        <article className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface-elevated)] p-6 shadow-sm">
+          <h2 className="mb-2 text-xl font-bold text-[var(--color-text)]">Premier article</h2>
+          <p className="text-[var(--color-text-muted)]">
+            Bienvenue sur mon blog ! Ceci est un exemple d&apos;article. Vous pouvez ajouter vos
+            propres textes ici.
+          </p>
+        </article>
       </div>
     </section>
   );
