@@ -1,19 +1,19 @@
 "use client";
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from "react";
 
 const tracks = [
   {
-    title: 'Exemple 1',
-    src: '/audio/exemple1.mp3',
+    title: "Exemple 1",
+    src: "/audio/exemple1.mp3",
   },
   {
-    title: 'Exemple 2',
-    src: '/audio/exemple2.mp3',
+    title: "Exemple 2",
+    src: "/audio/exemple2.mp3",
   },
 ];
 
 export default function CustomAudioPlayer() {
-  const audioRef = useRef(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
   const [currentTrack, setCurrentTrack] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -53,22 +53,24 @@ export default function CustomAudioPlayer() {
     }
   };
 
-  const handleSeek = (e) => {
+  const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (audioRef.current) {
-      const seekTime = (e.target.value / 100) * duration;
+      const seekTime = (Number(e.target.value) / 100) * duration;
       audioRef.current.currentTime = seekTime;
       setCurrentTime(seekTime);
     }
   };
 
-  const formatTime = (time) => {
+  const formatTime = (time: number) => {
     const min = Math.floor(time / 60);
-    const sec = Math.floor(time % 60).toString().padStart(2, '0');
+    const sec = Math.floor(time % 60)
+      .toString()
+      .padStart(2, "0");
     return `${min}:${sec}`;
   };
 
   return (
-    <div style={{width:'100%',maxWidth:500,margin:'0 auto',padding:'8px 0',display:'flex',flexDirection:'column',alignItems:'center'}}>
+    <div className="flex w-full max-w-md flex-col items-center gap-1 py-1 text-white">
       <audio
         ref={audioRef}
         src={tracks[currentTrack].src}
@@ -76,26 +78,45 @@ export default function CustomAudioPlayer() {
         onLoadedMetadata={handleLoadedMetadata}
         onEnded={handleNext}
       />
-      <div style={{width:'100%',display:'flex',alignItems:'center',gap:8}}>
-        <span style={{fontWeight:'bold'}}>{formatTime(currentTime)}</span>
+      <div className="flex w-full items-center gap-2">
+        <span className="text-xs font-bold tabular-nums">{formatTime(currentTime)}</span>
         <input
           type="range"
           min={0}
           max={100}
           value={duration ? (currentTime / duration) * 100 : 0}
           onChange={handleSeek}
-          style={{flex:1}}
+          className="h-1 flex-1 accent-brand-500"
+          aria-label="Progression de la lecture"
         />
-        <span style={{fontWeight:'bold'}}>{duration ? formatTime(duration) : '-:--'}</span>
+        <span className="text-xs font-bold tabular-nums">
+          {duration ? formatTime(duration) : "-:--"}
+        </span>
       </div>
-      <div style={{marginTop:8,display:'flex',gap:24,alignItems:'center'}}>
-        <button onClick={handlePrev} aria-label="Précédent" style={{fontSize:28,background:'none',border:'none',color:'#ff2a36',cursor:'pointer'}}>&#9198;</button>
-        <button onClick={handlePlayPause} aria-label={isPlaying ? 'Pause' : 'Lecture'} style={{fontSize:32,background:'none',border:'none',color:'#ff2a36',cursor:'pointer'}}>
-          {isPlaying ? '❚❚' : '►'}
+      <div className="mt-1 flex items-center gap-6">
+        <button
+          onClick={handlePrev}
+          aria-label="Précédent"
+          className="text-2xl text-brand-500 transition-transform hover:scale-110"
+        >
+          &#9198;
         </button>
-        <button onClick={handleNext} aria-label="Suivant" style={{fontSize:28,background:'none',border:'none',color:'#ff2a36',cursor:'pointer'}}>&#9197;</button>
+        <button
+          onClick={handlePlayPause}
+          aria-label={isPlaying ? "Pause" : "Lecture"}
+          className="text-3xl text-brand-500 transition-transform hover:scale-110"
+        >
+          {isPlaying ? "❚❚" : "►"}
+        </button>
+        <button
+          onClick={handleNext}
+          aria-label="Suivant"
+          className="text-2xl text-brand-500 transition-transform hover:scale-110"
+        >
+          &#9197;
+        </button>
       </div>
-      <div style={{marginTop:4,fontSize:14,color:'#ff2a36'}}>{tracks[currentTrack].title}</div>
+      <div className="mt-1 text-xs text-brand-500">{tracks[currentTrack].title}</div>
     </div>
   );
 }
