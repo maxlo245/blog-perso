@@ -37,8 +37,22 @@ npm run lint
 
 ## Déploiement
 
-Le site est déployé automatiquement sur **GitHub Pages** via GitHub Actions
-(`.github/workflows/deploy.yml`) à chaque push sur `main` :
+Le site est hébergé sur **Vercel**, avec déploiement automatique à chaque push :
+
+- **Production** : https://maxlo245-legendary-engine.vercel.app (le projet Vercel s'appelle
+  `blog-perso`, sous le compte `maxlo245`).
+- Le projet Vercel est connecté au dépôt GitHub `maxlo245/blog-perso` — chaque push sur une branche
+  génère un déploiement de preview, et chaque push sur `main` déploie en production
+  automatiquement (aucune action manuelle requise).
+- Pour redéployer manuellement en local : `npx vercel --prod` (nécessite d'être connecté avec
+  `npx vercel login`).
+- Aucune variable d'environnement n'est requise : le site n'a ni API route ni logique serveur.
+
+### Alternative : GitHub Pages
+
+Un workflow GitHub Actions (`.github/workflows/deploy.yml`) est aussi fourni pour déployer le site
+en export statique (`output: 'export'`) sur **GitHub Pages**, si tu préfères cette option à la
+place de Vercel :
 
 1. Le workflow installe les dépendances, build le site en export statique
    (`GITHUB_PAGES=true npm run build`, ce qui active le `basePath`/`assetPrefix` adaptés à GitHub
@@ -46,17 +60,11 @@ Le site est déployé automatiquement sur **GitHub Pages** via GitHub Actions
    `actions/deploy-pages`.
 2. Active GitHub Pages sur le repo avec la source **GitHub Actions** (Settings → Pages → Build and
    deployment → Source: GitHub Actions).
-3. Le site sera disponible à `https://<owner>.github.io/blog-perso/`.
+3. Le site sera alors disponible à `https://<owner>.github.io/blog-perso/`.
 
-### Alternative : déployer sur Vercel
-
-Si tu préfères un hébergement avec rendu serveur (SSR/ISR) plutôt que l'export statique, ce projet
-reste 100% compatible avec [Vercel](https://vercel.com), créateur de Next.js :
+Tu peux aussi importer le repo toi-même sur Vercel via ce bouton :
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/maxlo245/blog-perso)
-
-Il suffit de retirer `output: 'export'` de `next.config.ts` si tu utilises Vercel, puis de
-connecter le repo sur [vercel.com/new](https://vercel.com/new).
 
 ## Structure
 
