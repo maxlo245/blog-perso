@@ -163,7 +163,26 @@ footer .social-links a {
   transition: border-color .18s ease, background .18s ease, color .18s ease, transform .18s ease;
 }
 footer .social-links a:hover { transform: translateY(-2px); border-color: #ff9ba3 !important; background: #ffffff0b !important; color: #ffabb2 !important; }
-footer .social-links svg { width: 15px; height: 15px; flex: 0 0 auto; }
+footer .social-icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+  background-color: currentColor;
+  -webkit-mask: var(--social-icon) center / contain no-repeat;
+  mask: var(--social-icon) center / contain no-repeat;
+}
+footer .social-icon--x { --social-icon: url("/icons/social/x.svg"); }
+footer .social-icon--tiktok { --social-icon: url("/icons/social/tiktok.svg"); }
+footer .social-icon--spotify { --social-icon: url("/icons/social/spotify.svg"); }
+footer .social-icon--instagram { --social-icon: url("/icons/social/instagram.svg"); }
+footer .social-icon--discord { --social-icon: url("/icons/social/discord.svg"); }
+footer .social-icon--twitch { --social-icon: url("/icons/social/twitch.svg"); }
+footer .social-icon--reddit { --social-icon: url("/icons/social/reddit.svg"); }
+footer .social-icon--github { --social-icon: url("/icons/social/github.svg"); }
+footer .social-icon--kofi { --social-icon: url("/icons/social/kofi.svg"); }
+footer .social-icon--patreon { --social-icon: url("/icons/social/patreon.svg"); }
+footer .social-icon--stats { --social-icon: url("/icons/social/statsfm.svg"); }
 footer a {
   border: 0 !important;
   background: transparent !important;
