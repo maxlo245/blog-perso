@@ -13,7 +13,7 @@ const tracks = [
 ];
 
 export default function CustomAudioPlayer() {
-  const audioRef = useRef(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const [currentTrack, setCurrentTrack] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -53,15 +53,15 @@ export default function CustomAudioPlayer() {
     }
   };
 
-  const handleSeek = (e) => {
+  const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (audioRef.current) {
-      const seekTime = (e.target.value / 100) * duration;
+      const seekTime = (e.target.valueAsNumber / 100) * duration;
       audioRef.current.currentTime = seekTime;
       setCurrentTime(seekTime);
     }
   };
 
-  const formatTime = (time) => {
+  const formatTime = (time: number) => {
     const min = Math.floor(time / 60);
     const sec = Math.floor(time % 60).toString().padStart(2, '0');
     return `${min}:${sec}`;
@@ -99,3 +99,4 @@ export default function CustomAudioPlayer() {
     </div>
   );
 }
+
