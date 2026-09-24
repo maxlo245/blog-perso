@@ -152,8 +152,6 @@ footer a:hover { background: transparent !important; color: #fff !important; box
 .portfolio-home {
   --ink: var(--page-text);
   --muted: var(--text-muted);
-  --line: var(--line);
-  --accent: var(--accent);
   --accent-dark: var(--accent-strong);
   color: var(--page-text);
   background: var(--page-bg);
