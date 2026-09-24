@@ -36,7 +36,14 @@ const projects = [
   },
 ];
 
-const internships = [
+const internships: Array<{
+  number: string;
+  title: string;
+  organization: string;
+  description: string;
+  tags: string[];
+  href?: string;
+}> = [
   {
     number: "01",
     title: "Automatisation documentaire",
