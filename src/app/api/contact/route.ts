@@ -26,6 +26,10 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Requête invalide." }, { status: 400 });
   }
 
+  if (!body || typeof body !== "object" || Array.isArray(body)) {
+    return NextResponse.json({ error: "Requête invalide." }, { status: 400 });
+  }
+
   // Champ leurre anti-spam : répondre avec succès sans enregistrer le message.
   if (typeof body.website === "string" && body.website.trim()) {
     return NextResponse.json({ success: true });
