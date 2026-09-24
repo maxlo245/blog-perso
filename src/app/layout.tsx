@@ -41,6 +41,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
               <nav className="site-nav" aria-label="Navigation principale">
                 <a href="/">Accueil</a>
                 <a href="/#projets">Projets</a>
+                <a href="https://cours-bts-sio.vercel.app/" target="_blank" rel="noopener noreferrer">Cours BTS SIO</a>
                 <a href="/#stages">Stages</a>
                 <a href="/categories">Articles</a>
                 <a href="/contact">Contact</a>
