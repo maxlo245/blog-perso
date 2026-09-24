@@ -1,38 +1,92 @@
 const projects = [
   {
-    number: "01",
-    title: "Aventure Alpine",
-    type: "Site web",
+    title: "JavaStock",
+    type: "Application desktop · Java",
     description:
-      "Une expérience web immersive autour de l’alpinisme et des sports de montagne, pensée pour faire découvrir activités, conseils et destinations alpines.",
-    stack: ["HTML", "CSS", "JavaScript", "Tailwind CSS", "Vite"],
+      "Application de gestion de stocks pour des épreuves sportives : articles, coureurs, réservations, alertes de rupture et historique des opérations.",
+    stack: ["Java", "Swing", "PostgreSQL", "JDBC", "Maven"],
+    links: [{ label: "Code source", href: "https://github.com/maxlo245/javastock" }],
+  },
+  {
+    title: "Aventures Alpines",
+    type: "Plateforme web · sports de montagne",
+    description:
+      "Plateforme pour découvrir ski, escalade, randonnée et VTT, avec des itinéraires, des articles et un parcours de réservation.",
+    stack: ["JavaScript", "Node.js", "Vercel", "Render"],
     links: [
       { label: "Voir le site", href: "https://aventure-alpine.vercel.app/" },
       { label: "Code source", href: "https://github.com/maxlo245/Aventure-Alpine" },
     ],
   },
   {
-    number: "02",
-    title: "JavaStock",
-    type: "Application desktop",
+    title: "Discord Bot Manager",
+    type: "Application web et mobile",
     description:
-      "Une application de gestion de stock pour des épreuves sportives : articles, coureurs, réservations, alertes de stock et historique des opérations.",
-    stack: ["Java 21", "Swing", "PostgreSQL", "JDBC", "Docker", "Maven"],
-    links: [{ label: "Code source", href: "https://github.com/maxlo245/javastock" }],
+      "Projet multiplateforme pour gérer des bots et des serveurs Discord, structuré autour d’une API, d’une interface web, d’une application mobile et de types partagés.",
+    stack: ["TypeScript", "Next.js", "Express", "PostgreSQL", "Redis", "Expo"],
+    links: [{ label: "Code source", href: "https://github.com/maxlo245/app-discord" }],
   },
   {
-    number: "03",
+    title: "Bot Discord Rock & Metal",
+    type: "Bot Discord · veille musicale",
+    description:
+      "Bot de veille qui rassemble actualités, sorties d’albums et nouveautés de groupes depuis plus de 40 flux et plusieurs plateformes musicales.",
+    stack: ["JavaScript", "Discord", "RSS", "Spotify", "Last.fm"],
+    links: [{ label: "Code source", href: "https://github.com/maxlo245/bot-discord-rock-metal" }],
+  },
+  {
+    title: "Aéroport",
+    type: "Projet web · PHP",
+    description:
+      "Projet PHP autour du thème aéroportuaire, conservé dans mes dépôts publics. Le dépôt pourra être enrichi d’une présentation et d’une documentation détaillées.",
+    stack: ["PHP"],
+    links: [{ label: "Code source", href: "https://github.com/maxlo245/aeroport" }],
+  },
+  {
+    title: "Démineur",
+    type: "Jeu · C++",
+    description:
+      "Projet C++ autour du jeu du démineur. Le dépôt public contient le code source du projet.",
+    stack: ["C++"],
+    links: [{ label: "Code source", href: "https://github.com/maxlo245/demineur" }],
+  },
+  {
+    title: "Thyrio",
+    type: "Projet web",
+    description:
+      "Projet web réalisé en HTML et publié en ligne. Le code source et la démonstration sont accessibles ci-dessous.",
+    stack: ["HTML"],
+    links: [
+      { label: "Voir le site", href: "https://thyrio.vercel.app" },
+      { label: "Code source", href: "https://github.com/maxlo245/thyrio" },
+    ],
+  },
+  {
+    title: "Mindmap RGPD & cybersécurité",
+    type: "Ressource interactive · BTS SIO",
+    description:
+      "Carte mentale interactive pour réviser le RGPD et la cybersécurité : notions clés, exemples, vidéos et détails accessibles en sélectionnant les thèmes.",
+    stack: ["HTML", "CSS", "JavaScript", "RGPD", "Cybersécurité"],
+    links: [
+      { label: "Voir la mindmap", href: "https://maxlo245.github.io/mindmap-SLAM/" },
+      { label: "Code source", href: "https://github.com/maxlo245/mindmap-SLAM" },
+    ],
+  },
+  {
+    title: "AS Olympique Saint-Rémy",
+    type: "Application pédagogique · PHP / MySQL",
+    description:
+      "Application de gestion utilisée pour un exercice de cybersécurité BTS SIO sur les failles OWASP et leurs contre-mesures. Ce projet est prévu pour un environnement local uniquement.",
+    stack: ["PHP", "MySQL", "OWASP", "BTS SIO SLAM"],
+    links: [{ label: "Code source", href: "https://github.com/maxlo245/As-olympique" }],
+  },
+  {
     title: "Maison des Ligues",
     type: "Mission de formation",
     description:
-      "Une mission d’analyse et de développement dans le contexte d’une structure sportive régionale : étude des acteurs, des espaces et des besoins des ligues.",
+      "Mission d’analyse et de développement dans le contexte d’une structure sportive régionale : étude des acteurs, des espaces et des besoins des ligues.",
     stack: ["Analyse", "Gestion de projet", "BTS SIO SLAM"],
-    links: [
-      {
-        label: "Détails et livrables",
-        href: "https://portofolio-bts-slam.vercel.app/projets.html",
-      },
-    ],
+    links: [{ label: "Détails et livrables", href: "https://portofolio-bts-slam.vercel.app/projets.html" }],
   },
 ];
 
@@ -85,7 +139,7 @@ export default function Home() {
             </a>
           </div>
           <div className="hero-meta">
-            <span><b>03</b> projets présentés</span>
+          <span><b>{String(projects.length).padStart(2, "0")}</b> projets présentés</span>
             <span><b>02</b> expériences de stage</span>
             <a href="https://github.com/maxlo245" target="_blank" rel="noreferrer">GitHub <Arrow /></a>
           </div>
@@ -95,15 +149,15 @@ export default function Home() {
 
       <section id="projets" className="content-section">
         <div className="section-heading">
-          <div><p className="eyebrow">Ce que je construis</p><h2>Projets sélectionnés</h2></div>
+          <div><p className="eyebrow">Ce que je construis</p><h2>Mes projets</h2></div>
           <a className="text-link" href="https://github.com/maxlo245?tab=repositories" target="_blank" rel="noreferrer">
             Tous mes dépôts <Arrow />
           </a>
         </div>
         <div className="project-grid">
-          {projects.map((project) => (
-            <article className="project-card" key={project.number}>
-              <div className="card-topline"><span>{project.number} / 03</span><span>{project.type}</span></div>
+          {projects.map((project, index) => (
+            <article className="project-card" key={project.title}>
+              <div className="card-topline"><span>{String(index + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}</span><span>{project.type}</span></div>
               <h3>{project.title}</h3>
               <p className="card-description">{project.description}</p>
               <ul className="tag-list">

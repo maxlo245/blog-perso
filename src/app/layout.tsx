@@ -1,108 +1,101 @@
-
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ThemeToggleWrapper from "./ThemeToggleWrapper";
 import CustomAudioPlayer from "../components/CustomAudioPlayer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
+const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Maxime Laurent | Développeur web & BTS SIO SLAM",
   description: "Projets, stages et parcours de Maxime Laurent, étudiant en BTS SIO option SLAM.",
 };
 
-// Le bouton ThemeToggle est déplacé dans un composant client séparé ThemeToggleClient.tsx
+const socials = [
+  { label: "X", href: "https://x.com/maxlo425", icon: "x" },
+  { label: "TikTok", href: "https://tiktok.com/@maxlo245", icon: "tiktok" },
+  { label: "Spotify", href: "https://open.spotify.com/user/vj763nyyje953ae9bpf1hzg7e", icon: "spotify" },
+  { label: "Instagram", href: "https://instagram.com/maxime_larnt", icon: "instagram" },
+  { label: "Discord", href: "https://discord.gg/RcdajSBECj", icon: "discord" },
+  { label: "Twitch", href: "https://twitch.tv/maxlo425", icon: "twitch" },
+  { label: "Reddit", href: "https://reddit.com/user/Key-Ask-3385/", icon: "reddit" },
+  { label: "GitHub", href: "https://github.com/maxlo245", icon: "github" },
+  { label: "Ko-fi", href: "https://ko-fi.com/maxlo24", icon: "kofi" },
+  { label: "Patreon", href: "https://patreon.com/u66868989", icon: "patreon" },
+  { label: "stats.fm", href: "https://stats.fm/metalindustrial", icon: "stats" },
+];
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+function SocialIcon({ name }: { name: string }) {
+  const common = { fill: "currentColor", "aria-hidden": true as const };
+  switch (name) {
+    case "x":
+      return <svg viewBox="0 0 24 24" {...common}><path d="M18.9 2H22l-6.78 7.75L23.2 22h-6.25l-4.9-7.59L5.4 22H2.28l7.25-8.29L1.8 2h6.4l4.43 6.96L18.9 2Zm-1.1 17.87h1.73L7.27 4.02H5.41L17.8 19.87Z" /></svg>;
+    case "tiktok":
+      return <svg viewBox="0 0 24 24" {...common}><path d="M19.6 7.1a6.8 6.8 0 0 1-4.2-1.4v8.1a6.1 6.1 0 1 1-5.3-6.1v3.5a2.7 2.7 0 1 0 1.9 2.6V2h3.4c.2 2.1 1.9 3.8 4.2 4v1.1Z" /></svg>;
+    case "spotify":
+      return <svg viewBox="0 0 24 24" {...common}><path d="M12 1.5A10.5 10.5 0 1 0 12 22.5 10.5 10.5 0 0 0 12 1.5Zm4.8 15.2a.8.8 0 0 1-1.1.3c-2.9-1.8-6.5-2.2-10.8-1.2a.8.8 0 0 1-.4-1.6c4.7-1.1 8.7-.6 12 1.4.4.2.5.7.3 1.1Zm1.4-3.1a1 1 0 0 1-1.3.3c-3.3-2-8.3-2.6-12.2-1.4a1 1 0 0 1-.6-1.9c4.4-1.3 10- .7 13.8 1.6.5.3.6.9.3 1.4Zm.1-3.2C14.4 8.1 7.9 8 4.2 9.1a1.1 1.1 0 1 1-.6-2.1c4.3-1.3 11.5-1.1 16 1.5a1.1 1.1 0 0 1-1.2 1.9Z" /></svg>;
+    case "instagram":
+      return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.7" cy="6.5" r=".8" fill="currentColor" stroke="none" /></svg>;
+    case "discord":
+      return <svg viewBox="0 0 24 24" {...common}><path d="M19.7 5.1a18 18 0 0 0-4.4-1.4l-.6 1.2a16 16 0 0 0-5.4 0l-.6-1.2a18 18 0 0 0-4.4 1.4C1.5 9.2.7 13.2 1.1 17.1a18 18 0 0 0 5.4 2.7l1.2-1.9-1.9-.9.5-.4c3.7 1.7 7.7 1.7 11.4 0l.5.4-1.9.9 1.2 1.9a18 18 0 0 0 5.4-2.7c.5-4.6-.8-8.5-3.2-12Zm-11 9.7c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2Zm6.6 0c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2Z" /></svg>;
+    case "twitch":
+      return <svg viewBox="0 0 24 24" {...common}><path d="M4 2 2 5.5V21h5v3l3.2-3H15l7-7V2H4Zm16 11.2-4 4h-4l-3 2.8v-2.8H5V4h15v9.2ZM12 7h2v5h-2V7Zm5 0h2v5h-2V7Z" /></svg>;
+    case "reddit":
+      return <svg viewBox="0 0 24 24" {...common}><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm6.1 10.4a1.3 1.3 0 0 1-2.1 1 4.6 4.6 0 0 1 .1 1c0 2.3-1.8 4.1-4.1 4.1s-4.1-1.8-4.1-4.1c0-.3 0-.7.1-1a1.3 1.3 0 1 1 .8-1.2c.8-.6 1.8-.9 2.8-1l.7-3.2 2.2.5a1 1 0 1 1-.2.8l-1.5-.3-.5 2.3c1.1.1 2.1.4 2.9 1a1.3 1.3 0 0 1 2.9.1Zm-7.7 2.7c.4.4.9.6 1.6.6s1.2-.2 1.6-.6l.6.5c-.5.6-1.3.9-2.2.9s-1.7-.3-2.2-.9l.6-.5Z" /></svg>;
+    case "github":
+      return <svg viewBox="0 0 24 24" {...common}><path d="M12 .8a11.2 11.2 0 0 0-3.5 21.8c.6.1.8-.3.8-.6v-2.1c-3.1.7-3.8-1.3-3.8-1.3-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 1.7 2.6 1.2 3.2.9.1-.7.4-1.2.7-1.5-2.5-.3-5.1-1.3-5.1-5.5 0-1.2.4-2.1 1.1-2.9-.1-.3-.5-1.4.1-2.9 0 0 .9-.3 3 1.1a10.6 10.6 0 0 1 5.5 0c2.1-1.4 3-1.1 3-1.1.6 1.5.2 2.6.1 2.9.7.8 1.1 1.7 1.1 2.9 0 4.2-2.6 5.2-5.1 5.5.4.3.7 1 .7 2v3c0 .3.2.7.8.6A11.2 11.2 0 0 0 12 .8Z" /></svg>;
+    case "kofi":
+      return <svg viewBox="0 0 24 24" {...common}><path d="M3 5h14a3 3 0 0 1 3 3v.5h1a2 2 0 0 1 0 4h-1V15a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V5Zm14 2H5v8a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V8a1 1 0 0 0-1-1Zm4 3.5h-1V11h1a.5.5 0 0 0 0-1Z" /><path d="M8 9c-1.7 0-2.4 2-.9 3.2L12 17l4.9-4.8C18.4 11 17.7 9 16 9c-1 0-1.7.6-2 1.2-.3-.6-1-1.2-2-1.2s-1.7.6-2 1.2C9.7 9.6 9 9 8 9Z" /></svg>;
+    case "patreon":
+      return <svg viewBox="0 0 24 24" {...common}><path d="M14.5 2a7.5 7.5 0 1 1 0 15 7.5 7.5 0 0 1 0-15ZM3 2h3v20H3z" /></svg>;
+    default:
+      return <svg viewBox="0 0 24 24" {...common}><rect x="3" y="14" width="3" height="7" rx="1" /><rect x="8" y="10" width="3" height="11" rx="1" /><rect x="13" y="6" width="3" height="15" rx="1" /><rect x="18" y="2" width="3" height="19" rx="1" /></svg>;
+  }
+}
+
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="fr">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}>
-        <header className="w-full shadow-md border-b-4 border-red-700">
-          <div className="max-w-3xl mx-auto flex items-center justify-between py-4 px-6">
-            <a href="/" className="text-2xl font-extrabold tracking-tight" style={{color:'#b1001a'}}>Maxime Laurent</a>
-            <div className="flex items-center">
-              <nav className="site-nav flex flex-wrap justify-end gap-2 text-sm font-bold" aria-label="Navigation principale">
-                <a href="/" className="text-[#ff2a36] hover:text-white transition-colors">Accueil</a>
-                <a href="/#projets" className="text-[#ff2a36] hover:text-white transition-colors">Projets</a>
-                <a href="/#stages" className="text-[#ff2a36] hover:text-white transition-colors">Stages</a>
-                <a href="/categories" className="text-[#ff2a36] hover:text-white transition-colors">Articles</a>
-                <a href="/contact" className="text-[#ff2a36] hover:text-white transition-colors">Contact</a>
+        <header className="site-header">
+          <div className="site-header-inner">
+            <a href="/" className="site-brand">Maxime Laurent</a>
+            <div className="site-header-controls">
+              <nav className="site-nav" aria-label="Navigation principale">
+                <a href="/">Accueil</a>
+                <a href="/#projets">Projets</a>
+                <a href="/#stages">Stages</a>
+                <a href="/categories">Articles</a>
+                <a href="/contact">Contact</a>
               </nav>
-              {/* Bouton thème dans un composant client */}
               <ThemeToggleWrapper />
             </div>
           </div>
         </header>
+
         <main className="flex-1">{children}</main>
-        <footer className="w-full text-center py-6 mt-12 border-t border-red-700" style={{background:'#fff',color:'#ff2a36',position:'relative'}}>
-          © {new Date().getFullYear()} - Blog personnel par Maxime<br />
-          <span style={{display:'inline-flex',alignItems:'center',gap:'6px',flexWrap:'wrap'}}>
-            <a href="https://twitter.com/maxlo425" target="_blank" rel="noopener noreferrer" style={{color:'#ff2a36',marginRight:'10px',display:'inline-flex',alignItems:'center'}} aria-label="Twitter">
-              <svg width="20" height="20" viewBox="0 0 24 24" style={{marginRight:'4px',fill:'currentColor'}} xmlns="http://www.w3.org/2000/svg"><path d="M24 4.557a9.93 9.93 0 0 1-2.828.775 4.932 4.932 0 0 0 2.165-2.724c-.951.564-2.005.974-3.127 1.195A4.92 4.92 0 0 0 16.616 3c-2.73 0-4.942 2.21-4.942 4.932 0 .386.045.763.127 1.124C7.728 8.89 4.1 7.13 1.671 4.149c-.423.722-.666 1.561-.666 2.475 0 1.708.87 3.216 2.188 4.099a4.904 4.904 0 0 1-2.237-.616c-.054 2.281 1.581 4.415 3.949 4.89a4.936 4.936 0 0 1-2.224.084c.627 1.956 2.444 3.377 4.6 3.417A9.867 9.867 0 0 1 0 21.543a13.94 13.94 0 0 0 7.548 2.209c9.057 0 14.009-7.496 14.009-13.986 0-.213-.005-.425-.014-.636A9.936 9.936 0 0 0 24 4.557z"/></svg>
-              Twitter
-            </a>
-            <a href="https://tiktok.com/@maxlo245" target="_blank" rel="noopener noreferrer" style={{color:'#ff2a36',marginRight:'10px',display:'inline-flex',alignItems:'center'}} aria-label="TikTok">
-              <svg width="20" height="20" viewBox="0 0 256 256" style={{marginRight:'4px',fill:'currentColor'}} xmlns="http://www.w3.org/2000/svg"><path d="M216.4 128.6a88.4 88.4 0 0 1-88.4 88.4c-48.8 0-88.4-39.6-88.4-88.4s39.6-88.4 88.4-88.4c48.8 0 88.4 39.6 88.4 88.4zm-88.4-72.4c-40 0-72.4 32.4-72.4 72.4s32.4 72.4 72.4 72.4 72.4-32.4 72.4-72.4-32.4-72.4-72.4-72.4zm36.8 72.4c0 20.3-16.5 36.8-36.8 36.8s-36.8-16.5-36.8-36.8 16.5-36.8 36.8-36.8 36.8 16.5 36.8 36.8z"/></svg>
-              TikTok
-            </a>
-            <a href="https://open.spotify.com/user/vj763nyyje953ae9bpf1hzg7e" target="_blank" rel="noopener noreferrer" style={{color:'#ff2a36',marginRight:'10px',display:'inline-flex',alignItems:'center'}} aria-label="Spotify">
-              <svg width="20" height="20" viewBox="0 0 168 168" style={{marginRight:'4px',fill:'currentColor'}} xmlns="http://www.w3.org/2000/svg"><circle cx="84" cy="84" r="84"/><path fill="#fff" d="M120.1 116.2c-1.6 2.6-5 3.4-7.6 1.8-20.8-12.7-47-15.6-77.7-8.6-3 0.7-6-1.2-6.7-4.2-0.7-3 1.2-6 4.2-6.7 33.2-7.5 62.2-4.2 85.1 9.9 2.6 1.6 3.4 5 1.8 7.8zm10.9-21.7c-2 3.2-6.2 4.2-9.4 2.2-23.8-14.6-60.2-18.8-88.4-10.4-3.6 1-7.4-1-8.4-4.6-1-3.6 1-7.4 4.6-8.4 31.7-9.1 71.1-4.5 98.2 11.2 3.2 2 4.2 6.2 2.2 9.4zm11.2-23.2c-28.2-17.1-75.1-18.7-102.2-10.3-4.1 1.2-8.4-1.1-9.6-5.2-1.2-4.1 1.1-8.4 5.2-9.6 30.2-8.9 81.2-7.1 113.2 11.2 4 2.4 5.3 7.7 2.9 11.7-2.4 4-7.7 5.3-11.7 2.9z"/></svg>
-              Spotify
-            </a>
-            <a href="https://instagram.com/maxime_larnt" target="_blank" rel="noopener noreferrer" style={{color:'#ff2a36',marginRight:'10px',display:'inline-flex',alignItems:'center'}} aria-label="Instagram">
-              <svg width="20" height="20" viewBox="0 0 448 512" style={{marginRight:'4px',fill:'currentColor'}} xmlns="http://www.w3.org/2000/svg"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9 114.9-51.3 114.9-114.9-51.3-114.9-114.9-114.9zm0 186c-39.5 0-71.5-32-71.5-71.5s32-71.5 71.5-71.5 71.5 32 71.5 71.5-32 71.5-71.5 71.5zm146.4-194.3c0 14.9-12.1 27-27 27s-27-12.1-27-27 12.1-27 27-27 27 12.1 27 27zm76.1 27.2c-1.7-35.3-9.9-66.7-36.2-92.9C388.7 9.9 357.3 1.7 322 0 285.7-1.7 162.3-1.7 126 0 90.7 1.7 59.3 9.9 33.1 36.2 6.9 62.4-1.7 93.8 0 129.1c1.7 36.3 1.7 159.7 0 196-1.7 35.3 9.9 66.7 36.2 92.9 26.2 26.2 57.6 34.4 92.9 36.2 36.3 1.7 159.7 1.7 196 0 35.3-1.7 66.7-9.9 92.9-36.2 26.2-26.2 34.4-57.6 36.2-92.9 1.7-36.3 1.7-159.7 0-196zm-48.5 262c-7.8 19.6-22.9 34.7-42.5 42.5-29.4 11.7-99.2 9-132.5 9s-103.1 2.6-132.5-9c-19.6-7.8-34.7-22.9-42.5-42.5-11.7-29.4-9-99.2-9-132.5s-2.6-103.1 9-132.5c7.8-19.6 22.9-34.7 42.5-42.5 29.4-11.7 99.2-9 132.5-9s103.1-2.6 132.5 9c19.6 7.8 34.7 22.9 42.5 42.5 11.7 29.4 9 99.2 9 132.5s2.6 103.1-9 132.5z"/></svg>
-              Instagram
-            </a>
-            <a href="https://discord.gg/RcdajSBECj" target="_blank" rel="noopener noreferrer" style={{color:'#ff2a36',marginRight:'10px',display:'inline-flex',alignItems:'center'}} aria-label="Discord">
-              <svg width="20" height="20" viewBox="0 0 71 55" style={{marginRight:'4px',fill:'currentColor'}} xmlns="http://www.w3.org/2000/svg"><path d="M60.104 4.552A58.36 58.36 0 0 0 46.852.8a.117.117 0 0 0-.123.06c-2.048 3.614-4.096 8.29-5.616 12.06-6.656-.99-13.312-.99-19.968 0-1.52-3.77-3.568-8.446-5.616-12.06A.117.117 0 0 0 15.148.8a58.36 58.36 0 0 0-13.252 3.752.105.105 0 0 0-.05.043C.356 9.06-.213 13.46.066 17.82c.01.14.12.28.26.32 6.788 2.13 13.34 5.24 19.5 9.44a.12.12 0 0 0 .13.01c1.52-1.14 3.04-2.29 4.52-3.43a.12.12 0 0 1 .14 0c1.48 1.14 3 2.29 4.52 3.43a.12.12 0 0 0 .13-.01c6.16-4.2 12.71-7.31 19.5-9.44a.12.12 0 0 0 .26-.32c.28-4.36-.29-8.76-1.83-13.225a.105.105 0 0 0-.05-.043z"/></svg>
-              Discord
-            </a>
-            <a href="https://twitch.tv/maxlo425" target="_blank" rel="noopener noreferrer" style={{color:'#ff2a36',marginRight:'10px',display:'inline-flex',alignItems:'center'}} aria-label="Twitch">
-              <svg width="20" height="20" viewBox="0 0 512 512" style={{marginRight:'4px',fill:'currentColor'}} xmlns="http://www.w3.org/2000/svg"><path d="M80 0L0 96v416h144v96h96l96-96h96l96-96V0H80zm384 384h-96l-96 96v-96H80V96h384v288zm-64-160h-32v96h32v-96zm-96 0h-32v96h32v-96z"/></svg>
-              Twitch
-            </a>
-            <a href="https://reddit.com/user/Key-Ask-3385/" target="_blank" rel="noopener noreferrer" style={{color:'#ff2a36',marginRight:'10px',display:'inline-flex',alignItems:'center'}} aria-label="Reddit">
-              <svg width="20" height="20" viewBox="0 0 512 512" style={{marginRight:'4px',fill:'currentColor'}} xmlns="http://www.w3.org/2000/svg"><circle cx="256" cy="256" r="256"/><ellipse fill="#fff" cx="256" cy="256" rx="192" ry="128"/><circle fill="#ff4500" cx="176" cy="256" r="32"/><circle fill="#ff4500" cx="336" cy="256" r="32"/><ellipse fill="#fff" cx="256" cy="320" rx="80" ry="32"/></svg>
-              Reddit
-            </a>
-            <a href="https://github.com/maxlo245" target="_blank" rel="noopener noreferrer" style={{color:'#ff2a36',marginRight:'10px',display:'inline-flex',alignItems:'center'}} aria-label="GitHub">
-              <svg width="20" height="20" viewBox="0 0 24 24" style={{marginRight:'4px',fill:'currentColor'}} xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.415-4.042-1.415-.546-1.387-1.333-1.757-1.333-1.757-1.089-.745.084-.729.084-.729 1.205.084 1.84 1.236 1.84 1.236 1.07 1.834 2.809 1.304 3.495.997.108-.775.418-1.305.762-1.605-2.665-.305-5.466-1.334-5.466-5.93 0-1.31.469-2.381 1.236-3.221-.124-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.301 1.23a11.52 11.52 0 0 1 3.003-.404c1.018.005 2.045.138 3.003.404 2.291-1.553 3.297-1.23 3.297-1.23.653 1.653.242 2.873.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.803 5.624-5.475 5.921.43.372.823 1.102.823 2.222 0 1.606-.015 2.898-.015 3.293 0 .322.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-              GitHub
-            </a>
-            <a href="https://ko-fi.com/maxlo24" target="_blank" rel="noopener noreferrer" style={{color:'#ff2a36',marginRight:'10px',display:'inline-flex',alignItems:'center'}} aria-label="Ko-fi">
-              <svg width="20" height="20" viewBox="0 0 512 512" style={{marginRight:'4px',fill:'currentColor'}} xmlns="http://www.w3.org/2000/svg"><path d="M477.5 186.5c-13.5-13.5-31.5-21-50.5-21H80c-44.2 0-80 35.8-80 80s35.8 80 80 80h347c19 0 37-7.5 50.5-21 13.5-13.5 21-31.5 21-50.5s-7.5-37-21-50.5zM80 306c-22.1 0-40-17.9-40-40s17.9-40 40-40h347c22.1 0 40 17.9 40 40s-17.9 40-40 40H80z"/></svg>
-              Ko-fi
-            </a>
-            <a href="https://patreon.com/u66868989" target="_blank" rel="noopener noreferrer" style={{color:'#ff2a36',marginRight:'10px',display:'inline-flex',alignItems:'center'}} aria-label="Patreon">
-              <svg width="20" height="20" viewBox="0 0 24 24" style={{marginRight:'4px',fill:'currentColor'}} xmlns="http://www.w3.org/2000/svg"><circle cx="17.5" cy="6.5" r="6.5"/><rect x="1" y="1" width="6" height="22" rx="3"/></svg>
-              Patreon
-            </a>
-            <a href="https://stats.fm/metalindustrial" target="_blank" rel="noopener noreferrer" style={{color:'#ff2a36',marginRight:'10px',display:'inline-flex',alignItems:'center'}} aria-label="stats.fm">
-              <svg width="20" height="20" viewBox="0 0 24 24" style={{marginRight:'4px',fill:'currentColor'}} xmlns="http://www.w3.org/2000/svg"><rect x="2" y="17" width="2" height="5"/><rect x="6" y="13" width="2" height="9"/><rect x="10" y="9" width="2" height="13"/><rect x="14" y="5" width="2" height="17"/><rect x="18" y="1" width="2" height="21"/></svg>
-              stats.fm
-            </a>
-          </span>
-          <div id="music-player" style={{position:'fixed',left:0,right:0,bottom:0,zIndex:50,background:'#181818',borderTop:'2px solid #ff2a36',padding:'8px 0'}}>
-            <div style={{display:'flex',flexDirection:'column',alignItems:'center',gap:16}}>
-              <CustomAudioPlayer />
-              <div style={{display:'flex',justifyContent:'center',alignItems:'center',gap:32}}>
-                {/* Spotify */}
-                <iframe style={{borderRadius:12}} src="https://open.spotify.com/embed/playlist/06succq5Lndt6TcyplVAsn?utm_source=generator" width="340" height="400" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                {/* YouTube */}
-                <iframe width="280" height="80" src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=EnSIkaIECMiOmarE&amp;controls=1" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen style={{borderRadius:12}}></iframe>
+
+        <footer className="site-footer">
+          <div className="footer-inner">
+            <p className="footer-caption">© {new Date().getFullYear()} <strong>Maxime Laurent</strong> · projets, musique et idées.</p>
+            <nav className="social-links" aria-label="Réseaux sociaux">
+              {socials.map((social) => (
+                <a key={social.label} href={social.href} target="_blank" rel="noopener noreferrer" aria-label={social.label} title={social.label}>
+                  <SocialIcon name={social.icon} />
+                  <span>{social.label}</span>
+                </a>
+              ))}
+            </nav>
+            <div id="music-player" aria-label="Lecteur musical">
+              <div className="music-player-content">
+                <CustomAudioPlayer />
+                <iframe
+                  title="Playlist Spotify de Maxime"
+                  src="https://open.spotify.com/embed/playlist/06succq5Lndt6TcyplVAsn?utm_source=generator"
+                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                  loading="lazy"
+                />
               </div>
             </div>
           </div>
